@@ -3,7 +3,8 @@ public class ComputerPlayer extends Player{
 	private final int MIN_POINTS = 15;
 	
 	public ComputerPlayer(){
-		super("R2D2");
+		super("CPU");
+		myName = "R2D2";
 	}
 
 	@Override

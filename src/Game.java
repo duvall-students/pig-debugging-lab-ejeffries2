@@ -9,8 +9,9 @@ public class Game {
 	private final int LOSER_ROLL = 1;
 	
 	public Game(){
-		Player player1 = new GUIPlayer();
-		Player player2 = new ComputerPlayer();
+		//Removed the initialization of the variables and assigned them to the local player1 and player2 Player variables
+		player1 = new GUIPlayer();
+		player2 = new ComputerPlayer();
 		die = new Random();
 		spinner = new Spinner();
 	}
@@ -48,10 +49,13 @@ public class Game {
 		boolean keepGoing = true;
 		printStartRoundMessage(whoseTurn);
 		while(keepGoing){
-			int roll = die.nextInt(7);
+//			int roll = die.nextInt(7);
+// Changing the range of possible values from 0-6 to 0-5 and add 1 to the integer so it is impossible to get 0
+			int roll = die.nextInt(6) + 1;
 			String spin = spinner.spin();
 			System.out.println(roll+ " "+ spin);
 			
+/*
 			if(roll == LOSER_ROLL){
 				System.out.println("Lose a turn.");
 				return 0;
@@ -59,6 +63,18 @@ public class Game {
 			else if(spin == LOSER_SPIN.toUpperCase()){
 				System.out.println("Too bad!  Lose all your points.");
 				whoseTurn.resetScore();
+				return 0;
+			}
+*/
+// Changing the order of the if statements so that if the loser_spin case is true then the player loses all their points
+// Instead of just their turn in a "1/GRUNT" outcome
+			if(spin == LOSER_SPIN.toUpperCase()) {
+				System.out.println("Too bad!  Lose all your points.");
+				whoseTurn.resetScore();
+				return 0;
+			}
+			else if (roll == LOSER_ROLL) {
+				System.out.println("Lose a turn.");
 				return 0;
 			}
 			else{
@@ -72,7 +88,9 @@ public class Game {
 	
 	// True if one of the players has won the game.
 	public boolean winner(){
-		return player1.hasWon() && player2.hasWon();
+//		return player1.hasWon() && player2.hasWon();
+// Changing the boolean logic from && to || because there only needs to be one winner in order for the game to end
+		return player1.hasWon() || player2.hasWon();
 	}
 	
 	/* 
