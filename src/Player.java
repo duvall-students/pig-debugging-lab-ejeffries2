@@ -2,7 +2,9 @@
 public abstract class Player {
 
 	protected String myName;
-	protected int myScore;
+//	protected int myScore;
+// Changed from a protected private to a public variable so that the score can be changed from other scripts
+	public int myScore;
 	private final int WIN_SCORE = 100;
 	
 	public Player(String myName){
